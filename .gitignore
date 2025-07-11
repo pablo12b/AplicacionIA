@@ -334,3 +334,4 @@ tf_directml_env/Scripts/activate
 project_clv.json
 node_modules/utrie/dist/types/Util.d.ts
 /node_modules
+modelo_entrenado.keras

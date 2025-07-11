@@ -12,6 +12,10 @@ from uuid import uuid4
 # Configuración del servidor Flask
 app = Flask(__name__)
 
+import tensorflow as tf
+print(tf.__version__)
+
+
 MEGABYTE = (2 ** 10) ** 2
 app.config['MAX_CONTENT_LENGTH'] = None
 # Max number of fields in a multi part form (I don't send more than one file)
@@ -21,27 +25,19 @@ app.config['MAX_FORM_MEMORY_SIZE'] = 50 * MEGABYTE
 CORS(app)
 
 #PAVLO
-MODEL_PATH = "C:/Users/pablo/OneDrive/Documentos/GitHub/AppPrediccionMultiLabel/best_model.keras"
-#MODEL_PATH = "best_model.keras"
-#MODEL_PATH = "/home/eduardo-arce/Documentos/Inteligencia Artificial/Segundo_Interciclo/Modelos/best_model.keras"
+MODEL_PATH = "C:/Users/pablo/OneDrive/Documentos/GitHub/AppPrediccionMultiLabel/modelo_entrenado.keras"
 model = load_model(MODEL_PATH)
 
-# Configuración de categorías (COCO)
-from pycocotools.coco import COCO
-ANNOTATIONS_FILE = "C:/Users/pablo/Downloads/annotations_trainval2017/annotations/instances_train2017.json"
-#ANNOTATIONS_FILE = "C:/Users/dcpor/Downloads/annotations/instances_train2017.json"
-#ANNOTATIONS_FILE = "/home/eduardo-arce/Descargas/annotations_trainval2017/annotations/instances_train2017.json"
-coco = COCO(ANNOTATIONS_FILE)
-categories = coco.loadCats(coco.getCatIds())
+categories = [
+    'aceite de oliva', 'achiote', 'agua', 'cafe', 'cereal', 'chocolate',
+    'duraznos enlatados', 'fundas', 'gelatina', 'halls', 'hojuelas de avena',
+    'jabon', 'leche evaporada', 'leche', 'mantequilla', 'mayonesa', 'mostaza',
+    'papas fritas', 'papel higenico', 'pasta de dientes', 'pimienta de olor',
+    'pimienta', 'sal', 'salsa china', 'salsa de tomate', 'trident', 'yogurt'
+]
 
-# Mapeo de ID de categoría a índicee
-category_id_to_index = {cat['id']: idx for idx, cat in enumerate(categories)}
-
-#PASS PAVLO
+#PASS 
 password = "admin"
-#PASS EDU
-#password = "edu123"
-#password = "postgres"
 
 # Función para conectarse a la base de datos
 def get_db_connection():
@@ -56,14 +52,14 @@ def get_db_connection():
 
 # Función de predicción
 def predict_image(model, image_path, threshold=0.5):
-    img_size = (256, 256)  # Tamaño esperado por el modelo
+    img_size = (224, 224)  # Tamaño esperado por el modelo
     img = Image.open(image_path).convert('RGB').resize(img_size)
-    img_array = np.array(img) / 255.0
+    img_array = np.array(img) / 224.0
     img_array = np.expand_dims(img_array, axis=0)  # Añadir batch dimension
 
     prediction = model.predict(img_array)[0]  # Predicción para un batch único
     predicted_categories = [
-        categories[idx]['name'] for idx, prob in enumerate(prediction) if prob > threshold
+    categories[idx] for idx, prob in enumerate(prediction) if prob > threshold
     ]
     return predicted_categories, img_array[0]
 
