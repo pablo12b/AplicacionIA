@@ -104,7 +104,10 @@ def predict():
         file.save(file_path)
 
         # Generar la URL pública para el archivo
-        image_url = f"http://localhost:5000/{file_path.replace(os.path.sep, '/')}"
+        #URL Publica
+        image_url = f"http://192.168.122.13:5000/{file_path.replace(os.path.sep, '/')}"
+        #URL Local
+        # image_url = f"http://localhost:5000/{file_path.replace(os.path.sep, '/')}"
 
     elif 'image-data' in request.form:
         image_data = request.form['image-data']
@@ -123,7 +126,10 @@ def predict():
         image.save(file_path, 'JPEG')  # Especificar explícitamente el formato JPEG
 
         # Generar la URL pública para el archivo
-        image_url = f"http://localhost:5000/static/uploads/{unique_filename}"
+        #URL Publica
+        image_url = f"http://192.168.122.13:5000/static/uploads/{unique_filename}"
+        #URL Local
+        #image_url = f"http://localhost:5000/static/uploads/{unique_filename}"
     else:
         return jsonify({'error': 'No image data provided'}), 400
 
@@ -383,4 +389,4 @@ def generate_audio(predictions):
 
 # Ejecución del servidor Flask
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
