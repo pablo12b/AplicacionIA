@@ -5,6 +5,46 @@
 Una aplicación web fullstack que captura imágenes, identifica múltiples objetos mediante redes neuronales y describe los resultados por voz. Además, genera un historial visual de las predicciones almacenado en PostgreSQL a través de **PostgREST**.
 
 ---
+# Problemática
+
+En los supermercados actuales, tanto los consumidores como el personal enfrentan diversas dificultades relacionadas con la identificación eficiente y precisa de productos:
+
+- Confusiones entre productos similares.
+- Errores de etiquetado.
+- Demoras en el escaneo manual durante el proceso de facturación.
+- Barreras para personas con discapacidad visual.
+- Tareas repetitivas de inventario que podrían automatizarse.
+
+Esta problemática reduce la eficiencia operativa y afecta la experiencia de compra. Es necesaria una solución tecnológica que automatice la identificación de productos, mejore la inclusión y reduzca errores.
+
+---
+# Utilidad de la Solución
+
+- Mejora de la experiencia del consumidor: Identificación instantánea del producto escaneado.
+- Accesibilidad: Información auditiva mediante texto a voz para personas con discapacidad visual.
+- Automatización del inventario: Clasificación rápida y precisa por parte del personal.
+- Reducción de tiempos en caja: Potencial uso en estaciones de autoservicio sin necesidad de códigos de barras.
+- Interfaz intuitiva: Navegación por comandos de voz.
+
+---
+# Justificación
+
+La aplicación de visión por computadora permite automatizar el proceso de reconocimiento de productos, mejorando la eficiencia del inventario y reduciendo errores humanos. Este sistema:
+
+- Automatiza el control de stock.
+- Previene errores por etiquetado incorrecto.
+- Mejora la experiencia de compra.
+- Reduce costos a largo plazo.
+- Atiende la necesidad creciente de automatización en entornos comerciales.
+
+---
+# Dataset Utilizado
+
+El modelo de clasificación fue entrenado utilizando un conjunto de datos propio, diseñado para identificar productos comunes en supermercados. El dataset incluye imágenes etiquetadas manualmente para tareas de clasificación multietiqueta.
+
+Repositorio del dataset: https://github.com/pablo12b/dataset
+
+---
 
 ## Descripción del Proyecto
 
