@@ -105,18 +105,35 @@ Este sistema permite a los usuarios:
 ## Estructura del Proyecto
 
 /AppPrediccionMultiLabel
+
 │
+
 ├── frontend/ (Angular)
+
 │ ├── src/app/file-upload/
+
 │ ├── src/app/history/
+
 │ └── ...
+
 │
+
 ├── backend/ (Flask)
+
 │ ├── src.py
+
 │ ├── modelo_entrenado.keras
+
 │ ├── project_clv.json
+
 │ ├── static/uploads/
+
 │ ├── static/audio/
+
 │ └── templates/index.html
+
 │
+
 └── postgrest/
+
+---
