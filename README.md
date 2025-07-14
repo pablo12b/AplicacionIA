@@ -1,12 +1,12 @@
 # AplicacionIA
 
-# 🧠 MultiLabel Image Classifier Web App
+# MultiLabel Image Classifier Web App
 
 Una aplicación web fullstack que captura imágenes, identifica múltiples objetos mediante redes neuronales y describe los resultados por voz. Además, genera un historial visual de las predicciones almacenado en PostgreSQL a través de **PostgREST**.
 
 ---
 
-## 📝 Descripción del Proyecto
+## Descripción del Proyecto
 
 Este sistema permite a los usuarios:
 
@@ -18,7 +18,7 @@ Este sistema permite a los usuarios:
 
 ---
 
-## ⚙️ Tecnologías Usadas
+## Tecnologías Usadas
 
 - **Frontend:** Angular 16+
 - **Backend:** Flask (solo como puente entre frontend y modelo IA)
@@ -30,28 +30,28 @@ Este sistema permite a los usuarios:
 
 ---
 
-## 🔁 Flujo de Trabajo
+## Flujo de Trabajo
 
 ### 1. 📸 Captura de Imágenes (Angular)
 - Angular accede a la cámara con `navigator.mediaDevices`.
 - La imagen se puede subir o capturar desde la vista principal.
 - Se envía al backend Flask mediante `FormData`.
 
-### 2. 🧼 Preprocesamiento (Flask)
+### 2. Preprocesamiento (Flask)
 - Flask redimensiona la imagen a 224x224 (input del modelo).
 - Normaliza los píxeles (0–1).
 - Convierte a tensor para Keras.
 
-### 3. 🧠 Clasificación Multietiqueta (Keras)
+### 3. Clasificación Multietiqueta (Keras)
 - El modelo preentrenado `.keras` predice múltiples etiquetas.
 - Se aplica umbral (ej: `>0.5`) para filtrar etiquetas significativas.
 
-### 4. 🔊 Descripción por Voz (Google API)
+### 4. Descripción por Voz (Google API)
 - Flask genera una frase como:
   `"Los objetos detectados son: leche, jabón, y cereal."`
 - Esta frase se convierte en un archivo `.mp3` con Google Text-to-Speech.
 
-### 5. 📂 Almacenamiento (PostgREST)
+### 5. Almacenamiento (PostgREST)
 - Flask envía un `POST` a la API de PostgREST con:
   - URL de la imagen
   - Lista de predicciones
@@ -62,7 +62,8 @@ Este sistema permite a los usuarios:
 
 ---
 
-## 🗃️ Estructura del Proyecto
+## Estructura del Proyecto
+
 /AppPrediccionMultiLabel
 │
 ├── frontend/ (Angular)
