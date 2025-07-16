@@ -37,6 +37,15 @@ export class HistorialComponent implements OnInit {
     }
   }
 
+  playAudio(audiourl: string): void {
+  console.log('audio: ', audiourl);
+  const audio = new Audio(audiourl);
+  audio.play().catch((error) => {
+    console.error('Error al reproducir el audio:', error);
+  });
+}
+
+
   generateReport(prediction: any): void {
     const doc = new jsPDF();
 

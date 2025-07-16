@@ -17,6 +17,7 @@
                 <th>Imagen</th>
                 <th pSortableColumn="timestamp">Fecha <p-sortIcon field="timestamp"></p-sortIcon></th>
                 <th>Predicción</th>
+                <th>Audio</th>
                 <th>Generar Reporte</th>
             </tr>
         </ng-template>
@@ -28,6 +29,12 @@
                 </td>
                 <td>{{prediction.timestamp}}</td>
                 <td>{{prediction.predictions}}</td>
+                <td>
+                  <button pButton pRipple type="button" icon="pi pi-volume-up"
+                    class="p-button-text p-button-icon-only"
+                    (click)="playAudio(prediction.audio_url)">
+                  </button>
+                </td>
                 <td>
                     <button pButton pRipple type="button" icon="pi pi-file-pdf"
                         class="p-button p-component p-button-text p-button-icon-only"

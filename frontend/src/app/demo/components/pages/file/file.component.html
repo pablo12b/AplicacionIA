@@ -1,73 +1,43 @@
-<p-toast position="top-center" key="confirm" (onClose)="onClose()" [baseZIndex]="5000">
-    <ng-template let-message pTemplate="headless" let-closeFn="closeFn">
-        <section
-            class="flex flex-column sm:flex-row p-3 gap-3 w-full bg-black-alpha-90 shadow-2"
-            style="border-radius: 10px; max-width: 90%; margin: auto;"
+<!-- Paso 1: Subir imagen -->
+<section class="card w-11 sm:w-8 lg:w-6 mx-auto mb-4">
+    <h2 class="text-center">1. Cargar Imagen</h2>
+    <p-fileUpload
+        name="file"
+        customUpload="true"
+        (uploadHandler)="onFileUpload($event)"
+        chooseLabel="Seleccionar Archivo"
+        uploadLabel="Subir"
+        cancelLabel="Cancelar"
+        [auto]="true"
+        [maxFileSize]="10000000"
+        accept="image/*"
+        class="w-full"
+    />
+</section>
+
+<!-- Paso 2: Predicción -->
+<section class="card w-11 sm:w-8 lg:w-6 mx-auto">
+    <h2 class="text-center">2. Predicciones</h2>
+    
+    <div *ngIf="predictions.length > 0" class="p-mt-4 predictions-container">
+        <h3 class="p-mb-3 text-center">Etiquetas Detectadas:</h3>
+        <ul class="p-pl-3">
+            <li
+                *ngFor="let prediction of predictions"
+                class="prediction-item flex align-items-center gap-2"
+            >
+                <i class="pi pi-check-circle text-primary-500"></i>{{ prediction }}
+            </li>
+        </ul>
+
+        <button
+            pButton
+            pRipple
+            icon="pi pi-volume-up"
+            class="p-button-text mt-3 mx-auto sm:mx-0"
+            (click)="playAudio(audio_Url)"
         >
-            <i class="pi pi-cloud-upload text-primary-500 text-2xl"></i>
-            <div class="flex flex-column gap-3 w-full">
-                <p class="m-0 font-semibold text-base text-white">
-                    {{ message.summary }}
-                </p>
-                <p class="m-0 text-base text-700">
-                    {{ message.detail }}
-                </p>
-                <div class="flex flex-column gap-2">
-                    <p-progressBar [value]="progress" [showValue]="false" [style]="{ height: '4px' }" />
-                    <label class="text-right text-xs text-white">
-                        {{ progress }}% uploaded...
-                    </label>
-                </div>
-                <div class="flex gap-3 mb-3 justify-content-center sm:justify-content-end">
-                    <p-button label="Subir otro archivo?" [text]="true" styleClass="p-0" (onClick)="onClose()" />
-                    <p-button label="Cancelar" [text]="true" styleClass="text-white p-0" (onClick)="onClose()" />
-                </div>
-            </div>
-        </section>
-    </ng-template>
-</p-toast>
-
-<div class="card flex justify-content-center">
-    <div class="w-11 sm:w-8 lg:w-6">
-        <p-accordion [activeIndex]="0">
-            <p-accordionTab header="1. Cargar Archivo">
-                <h2 class="p-mb-4 text-center">Cargar Imagen</h2>
-                <p-fileUpload
-                    name="file"
-                    customUpload="true"
-                    (uploadHandler)="onFileUpload($event)"
-                    chooseLabel="Seleccionar Archivo"
-                    uploadLabel="Subir"
-                    cancelLabel="Cancelar"
-                    [auto]="true"
-                    [maxFileSize]="10000000"
-                    accept="image/*"
-                    class="w-full"
-                />
-            </p-accordionTab>
-
-            <p-accordionTab header="2. Predicciones">
-                <div *ngIf="predictions.length > 0" class="p-mt-4 predictions-container">
-                    <h3 class="p-mb-3 text-center">Predicciones:</h3>
-                    <ul class="p-pl-3">
-                        <li
-                            *ngFor="let prediction of predictions"
-                            class="prediction-item flex align-items-center gap-2"
-                        >
-                            <i class="pi pi-check-circle text-primary-500"></i>{{ prediction }}
-                        </li>
-                    </ul>
-                </div>
-                <button
-                    pButton
-                    pRipple
-                    icon="pi pi-volume-up"
-                    class="p-button-text mx-auto sm:mx-0"
-                    (click)="playAudio(audio_Url)"
-                >
-                    Reproducir
-                </button>
-            </p-accordionTab>
-        </p-accordion>
+            Reproducir
+        </button>
     </div>
-</div>
+</section>

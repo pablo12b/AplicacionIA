@@ -141,7 +141,8 @@ def predict():
         # Generar el audio con las predicciones
         audio_filename = generate_audio(predicted_categories)
         
-        audio_url = f"http://localhost:5000/{audio_filename}"
+        audio_url = f"http://192.168.122.13:5000/{audio_filename}"
+        #audio_url = f"http://localhost:5000/{audio_filename}"
                 # Guardar la imagen y las predicciones en la base de datos
         save_prediction_to_db(image_url, predicted_categories, user_id, audio_url)
         
@@ -201,7 +202,7 @@ def get_predictions():
         with conn.cursor() as cursor:
             # Seleccionar las predicciones recientes del usuario autenticado
             cursor.execute("""
-                SELECT p.image_url, p.predictions, p.timestamp, p.user_id, u.name AS nombre
+                SELECT p.image_url, p.predictions, p.timestamp, p.audio_url, p.user_id, u.name AS nombre
                 FROM predictions p
                 JOIN users u 
                 ON p.user_id = u.id
@@ -216,7 +217,8 @@ def get_predictions():
                 'image_url': row[0],
                 'predictions': row[1],
                 'timestamp': row[2],
-                'nombre': row[4]
+                'audio_url': row[3],
+                'nombre': row[5]
             } for row in rows
         ]
 
