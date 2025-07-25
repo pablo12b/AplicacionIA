@@ -25,7 +25,7 @@ app.config['MAX_FORM_MEMORY_SIZE'] = 50 * MEGABYTE
 CORS(app)
 
 #PAVLO
-MODEL_PATH = "C:/Users/pablo/OneDrive/Documentos/GitHub/AppPrediccionMultiLabel/modelo_entrenado.keras"
+MODEL_PATH = "C:/Users/pablo/OneDrive/Documentos/GitHub/AppPrediccionMultiLabel/my_cnn_model.keras"
 model = load_model(MODEL_PATH)
 
 categories = [
